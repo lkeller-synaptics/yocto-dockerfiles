@@ -14,6 +14,7 @@ RUN apt-get update && \
         gawk \
         wget \
         git-core \
+        dumb-init \
         subversion \
         diffstat \
         unzip \
@@ -60,11 +61,6 @@ RUN apt-get update && \
     /usr/sbin/locale-gen en_US.UTF-8 && \
     echo 'dash dash/sh boolean false' | debconf-set-selections && \
     DEBIAN_FRONTEND=noninteractive dpkg-reconfigure dash
-
-COPY build-install-dumb-init.sh /
-RUN  bash /build-install-dumb-init.sh && \
-     rm /build-install-dumb-init.sh && \
-     apt-get clean
 
 USER yoctouser
 WORKDIR /home/yoctouser
